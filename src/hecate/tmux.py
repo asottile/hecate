@@ -81,14 +81,10 @@ class Tmux(object):
         self.execute_command("select-pane", "-t", pane)
 
     def send_keys(self, pane, keys):
-        self.execute_command(*(
-            ["send-keys", "-t", pane] + list(keys)
-        ))
+        self.execute_command("send-keys", "-t", pane, "--", *keys)
 
     def send_key(self, pane, key):
-        self.execute_command(*(
-            ["send-keys", "-t", pane, key]
-        ))
+        self.execute_command("send-keys", "-t", pane, "--", key)
 
     def sessions(self):
         return _extract_names(self.execute_command("list-sessions"))
